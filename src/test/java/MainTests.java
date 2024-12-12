@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Owner("Babok.PS")
 public class MainTests {
 
-    // Этот тест я сделал специально провальным, для наглядности Allue отчета
+
     @Test
     @Epic("Эпик 1: Основной функционал")
     @Feature("Фича 1: Арифметические операции")
@@ -16,7 +16,7 @@ public class MainTests {
     @Severity(SeverityLevel.CRITICAL)
     @Link(name = "GitHub", url = "https://github.com")
     public void testAddition() {
-        assertEquals(5, 2 + 2, "Результат сложения некорректен");
+        assertEquals(4, 2 + 2, "Результат сложения некорректен");
     }
 
     @Test
@@ -75,7 +75,6 @@ public class MainTests {
     }
 
 
-    // Этот тест я сделал специально провальным, для наглядности Allue отчета
     @Test
     @Epic("Эпик 2: Операции со строками")
     @Feature("Фича 3: Основные проверки")
@@ -83,10 +82,9 @@ public class MainTests {
     @Description("Этот тест проверяет длину строки.")
     @Severity(SeverityLevel.MINOR)
     public void testStringLength() {
-        assertEquals(4, "Hello".length());
+        assertEquals(5, "Hello".length());
     }
 
-    // Этот тест я сделал специально провальным, для наглядности Allue отчета
     @Test
     @Epic("Эпик 2: Операции со строками")
     @Feature("Фича 3: Основные проверки")
@@ -94,7 +92,7 @@ public class MainTests {
     @Description("Этот тест проверяет, содержит ли строка заданную подстроку.")
     @Severity(SeverityLevel.CRITICAL)
     public void testStringContains() {
-        assertEquals(true, "HelloWorld".contains("Petrushka"));
+        assertEquals(false, "HelloWorld".contains("Petrushka"));
     }
 
     @Test
