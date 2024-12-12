@@ -1,39 +1,33 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven_3.8.5' // Убедитесь, что версия Maven установлена на Jenkins
+        maven 'Maven_3.8.5' // Название инструмента Maven, настроенного в Jenkins
     }
     stages {
-        stage('Checkout') {
+        stage('Clone repository') {
             steps {
-                checkout scm
+                git 'https://github.com/username/repository-name.git' // Ваш репозиторий
             }
         }
-        stage('Build') {
+        stage('Build and Run Tests') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn clean test'
             }
         }
-        stage('Test') {
+        stage('Generate Allure Report') {
             steps {
-                sh 'mvn test'
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'target/allure-results']]
+                ])
             }
-        }
-        stage('Allure Report') {
-            steps {
-                sh 'mvn allure:report'
-            }
-                post {
-                    always {
-                        allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
-                    }
-                }
         }
     }
     post {
         always {
+            junit '**/target/surefire-reports/*.xml' // Отчеты JUnit
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-            junit 'target/surefire-reports/*.xml'
         }
     }
 }
